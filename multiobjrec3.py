@@ -84,6 +84,8 @@ for c in contours:
     else:
         continue
 
+cv2.imshow("Original",img)
+
 rg=cv2.cvtColor(red, cv2.COLOR_BGR2GRAY)
 rbug = cv2.blur(rg, (3,3))
 edges2=cv2.Canny(rbug,80,100)
@@ -147,10 +149,13 @@ for c in contours3:
     else:
         continue
 
+outlns=objects+objects2+objects3
+cv2.imshow("Contours",outlns)
+
 for i in range(3):
     for k in range(3):
         for m in range(3):
-            if radx[m]==bxx[k] and radx[m]==grx[i]:
+            if abs(radx[m]-bxx[k])<5 and abs(radx[m]-grx[i])<5:
                 if rady[m]<byy[k] and rady[m]<gry[i]:
                     if byy[k]<gry[i]:
                         print("RBG")
